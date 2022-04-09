@@ -4,12 +4,24 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
+import { BrowserRouter } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+
+if (process.env.NODE_ENV === 'development') {
+  const { worker } = require('./__mocks__/browser');
+
+  worker.start();
+}
 
 ReactDOM.render(
-  <StrictMode>
-    <ColorModeScript />
-    <App />
-  </StrictMode>,
+  <BrowserRouter>
+    <StrictMode>
+      <ColorModeScript />
+      <RecoilRoot>
+        <App />
+      </RecoilRoot>
+    </StrictMode>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 
